@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -49,18 +50,21 @@ public class ProductCategoryServiceImpl extends ServiceImpl<ProductCategoryMappe
 //            BeanUtils.copyProperties(productCategory, productCategoryVO);
 //            productCategoryVOSLevelOne.add(productCategoryVO);
 //        }
-        List<ProductCategoryVO> vOSLevelOne = levelOne.stream().map(e -> );
+        List<ProductCategoryVO> vOSLevelOne = levelOne.stream().map(e -> new ProductCategoryVO(e.getId(), e.getName())).collect(Collectors.toList());
 
         //二级分类
         wrapper = new QueryWrapper();
         wrapper.eq("type",2);
         List<ProductCategory> levelTwo = productCategoryMapper.selectList(wrapper);
+        List<ProductCategoryVO> vOSLevelTwo = levelTwo.stream().map(e -> new ProductCategoryVO(e.getId(), e.getName())).collect(Collectors.toList());
 
 
         //三级分类
         wrapper = new QueryWrapper();
         wrapper.eq("type",3);
         List<ProductCategory> levelThree = productCategoryMapper.selectList(wrapper);
+        List<ProductCategoryVO> vOSLevelThree = levelThree.stream().map(e -> new ProductCategoryVO(e.getId(), e.getName())).collect(Collectors.toList());
+
 
         return null;
     }
