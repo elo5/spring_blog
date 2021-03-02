@@ -30,42 +30,32 @@ public class ProductCategoryServiceImpl extends ServiceImpl<ProductCategoryMappe
 
     @Override
     public List<ProductCategoryVO> getAllProductCategoryVO() {
-//        //实体类转VO
-//        List<ProductCategory> productCategories = productCategoryMapper.selectList(null);
-//        List<ProductCategoryVO> productCategoryVOS = new ArrayList<>();
-//        for (ProductCategory productCategory : productCategories){
-//            ProductCategoryVO productCategoryVO = new ProductCategoryVO();
-//            BeanUtils.copyProperties(productCategory, productCategoryVO);
-//            productCategoryVOS.add(productCategoryVO);
-//        }
-//        return productCategoryVOS;
 
-        //一级分类
         QueryWrapper wrapper = new QueryWrapper();
         wrapper.eq("type",1);
-        List<ProductCategory> levelOne = productCategoryMapper.selectList(wrapper);
-//        List<ProductCategoryVO> productCategoryVOSLevelOne = new ArrayList<>();
-//        for (ProductCategory productCategory : levelOne){
-//            ProductCategoryVO productCategoryVO = new ProductCategoryVO();
-//            BeanUtils.copyProperties(productCategory, productCategoryVO);
-//            productCategoryVOSLevelOne.add(productCategoryVO);
-//        }
-        List<ProductCategoryVO> vOSLevelOne = levelOne.stream().map(e -> new ProductCategoryVO(e.getId(), e.getName())).collect(Collectors.toList());
+        List<ProductCategory> orginal = productCategoryMapper.selectList(wrapper);
+        List<ProductCategoryVO> voList = orginal.stream().map(e -> new ProductCategoryVO(e.getId(), e.getName())).collect(Collectors.toList());
 
-        //二级分类
-        wrapper = new QueryWrapper();
-        wrapper.eq("type",2);
-        List<ProductCategory> levelTwo = productCategoryMapper.selectList(wrapper);
-        List<ProductCategoryVO> vOSLevelTwo = levelTwo.stream().map(e -> new ProductCategoryVO(e.getId(), e.getName())).collect(Collectors.toList());
+        for (ProductCategoryVO vo : voList){
+            vo.setBannerImg("banner0.png");
+            vo.setTopImg("top0.png");
+            wrapper =  new QueryWrapper();
+            wrapper.eq("type", 2);
+            wrapper.eq("parent_id", vo.getId());
+            List<ProductCategory> l2 = productCategoryMapper.selectList(wrapper);
+            List<ProductCategoryVO> voL2 = l2.stream().map(e -> new ProductCategoryVO(e.getId(), e.getName())).collect(Collectors.toList());
+            vo.setChildren(voL2);
 
+            for (ProductCategoryVO vo1 : voL2){
+                wrapper =  new QueryWrapper();
+                wrapper.eq("type", 3);
+                wrapper.eq("parent_id", vo1.getId());
+                List<ProductCategory> l3 = productCategoryMapper.selectList(wrapper);
+                List<ProductCategoryVO> voL3 = l3.stream().map(e -> new ProductCategoryVO(e.getId(), e.getName())).collect(Collectors.toList());
+                vo1.setChildren(voL3);
+            }
+        }
 
-        //三级分类
-        wrapper = new QueryWrapper();
-        wrapper.eq("type",3);
-        List<ProductCategory> levelThree = productCategoryMapper.selectList(wrapper);
-        List<ProductCategoryVO> vOSLevelThree = levelThree.stream().map(e -> new ProductCategoryVO(e.getId(), e.getName())).collect(Collectors.toList());
-
-
-        return null;
+        return voList;
     }
 }
