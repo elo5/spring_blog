@@ -11,17 +11,11 @@ public class ProductCategoryVO {
     private List<ProductCategoryVO> children;
     private String bannerImg;
     private String topImg;
+    private List<ProductVO> productVOList;
 
     public ProductCategoryVO(Integer id, String name){
         this.id = id;
         this.name = name;
     }
-
-//    public ProductCategoryVO(Integer id, String name, String bannerImg, String topImg){
-//        this.id = id;
-//        this.name = name;
-//        this.bannerImg = bannerImg;
-//        this.topImg = topImg;
-//    }
 
 }

@@ -1,11 +1,15 @@
 package com.lilwork.mmall.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.lilwork.mmall.entity.Product;
 import com.lilwork.mmall.entity.ProductCategory;
 import com.lilwork.mmall.mapper.ProductCategoryMapper;
+import com.lilwork.mmall.mapper.ProductMapper;
 import com.lilwork.mmall.service.ProductCategoryService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.lilwork.mmall.service.ProductService;
 import com.lilwork.mmall.vo.ProductCategoryVO;
+import com.lilwork.mmall.vo.ProductVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +32,9 @@ public class ProductCategoryServiceImpl extends ServiceImpl<ProductCategoryMappe
     @Autowired
     private ProductCategoryMapper productCategoryMapper;
 
+    @Autowired
+    protected ProductMapper productMapper;
+
     @Override
     public List<ProductCategoryVO> getAllProductCategoryVO() {
 
@@ -36,9 +43,17 @@ public class ProductCategoryServiceImpl extends ServiceImpl<ProductCategoryMappe
         List<ProductCategory> orginal = productCategoryMapper.selectList(wrapper);
         List<ProductCategoryVO> voList = orginal.stream().map(e -> new ProductCategoryVO(e.getId(), e.getName())).collect(Collectors.toList());
 
+        int index = 0;
         for (ProductCategoryVO vo : voList){
-            vo.setBannerImg("banner0.png");
-            vo.setTopImg("top0.png");
+            vo.setBannerImg("banner" + index +".png");
+            vo.setTopImg("top" + index +".png");
+
+            wrapper =  new QueryWrapper();
+            wrapper.eq("categorylevelone_id", vo.getId());
+            List<Product> productList = productMapper.selectList(wrapper);
+            vo.setProductVOList(productList.stream().map(e -> new ProductVO(e.getId(), e.getName(), e.getPrice(),e.getFileName())).collect(Collectors.toList()));
+
+
             wrapper =  new QueryWrapper();
             wrapper.eq("type", 2);
             wrapper.eq("parent_id", vo.getId());
@@ -54,6 +69,7 @@ public class ProductCategoryServiceImpl extends ServiceImpl<ProductCategoryMappe
                 List<ProductCategoryVO> voL3 = l3.stream().map(e -> new ProductCategoryVO(e.getId(), e.getName())).collect(Collectors.toList());
                 vo1.setChildren(voL3);
             }
+            index++;
         }
 
         return voList;

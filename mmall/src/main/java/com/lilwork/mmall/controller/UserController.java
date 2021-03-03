@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.lilwork.mmall.entity.User;
 import com.lilwork.mmall.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,6 +46,19 @@ public class UserController {
     public String logout(HttpSession session){
         session.invalidate();
         return "login";
+    }
+
+    @PostMapping("/register")
+    public String register(User user, Model model){
+        user.setGender(1);
+        user.setFileName("2.jpg");
+        boolean result = false;
+        try {
+            result = userService.save(user);
+        }catch (Exception e){
+            model.addAttribute("error", user.getLoginName() + "已存在");
+        }
+        return result ? "login" : "register";
     }
 }
 

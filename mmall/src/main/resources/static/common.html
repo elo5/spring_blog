@@ -4,6 +4,7 @@
 <div th:fragment="source">
     <script type="text/javascript" src="/js/jquery-1.8.3.min.js"></script>
     <link type="text/css" rel="stylesheet" href="/css/style.css"/>
+    <link rel="shortcut icon" type="image/png" th:href="@{/images/favicon-32x32.png}"/>
 </div>
 
 <!-- 头文件 -->
@@ -123,29 +124,29 @@
                 <input type="submit" value="搜索" class="s_btn">
             </form>
         </div>
-        <div class="i_car">
-            <a href="/cart/findAllCart">
-                <div class="car_t">
-                    购物车 [
-                    <span th:text="${cartList.size()}"></span>
-                    ]
-                </div>
-            </a>
+<!--        <div class="i_car">-->
+<!--            <a href="/cart/findAllCart">-->
+<!--                <div class="car_t">-->
+<!--                    购物车 [-->
+<!--                    <span th:text="${cartList.size()}"></span>-->
+<!--                    ]-->
+<!--                </div>-->
+<!--            </a>-->
 
-            <div class="car_bg">
-                <div class="un_login">我的购物车</div>
-                <ul class="cars">
-                    <li th:each="cart:${cartList}">
-                        <div class="img"><a th:href="'/product/findById/'+${cart.productId}"><img th:src="'/images/'+${cart.fileName}" width="58" height="58" /></a></div>
-                        <div class="name"><a th:href="'/product/findById/'+${cart.productId}" th:text="${cart.name}"></a></div>
-                        <div class="price"><font color="#ff4e00" th:text="'￥'+${cart.price}"></font> X <span class="quantity" th:text="${cart.quantity}"></span>  =  <span class="cost" th:text="${cart.cost}"></span></div>
-                    </li>
-                </ul>
-                <div class="price_sum">共计&nbsp;<font color="#ff4e00">￥</font><span id="totalCost"></span></div>
-                <div class="price_a"><a href="/cart/findAllCart">去结算</a></div>
-            </div>
+<!--            <div class="car_bg">-->
+<!--                <div class="un_login">我的购物车</div>-->
+<!--                <ul class="cars">-->
+<!--                    <li th:each="cart:${cartList}">-->
+<!--                        <div class="img"><a th:href="'/product/findById/'+${cart.productId}"><img th:src="'/images/'+${cart.fileName}" width="58" height="58" /></a></div>-->
+<!--                        <div class="name"><a th:href="'/product/findById/'+${cart.productId}" th:text="${cart.name}"></a></div>-->
+<!--                        <div class="price"><font color="#ff4e00" th:text="'￥'+${cart.price}"></font> X <span class="quantity" th:text="${cart.quantity}"></span>  =  <span class="cost" th:text="${cart.cost}"></span></div>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--                <div class="price_sum">共计&nbsp;<font color="#ff4e00">￥</font><span id="totalCost"></span></div>-->
+<!--                <div class="price_a"><a href="/cart/findAllCart">去结算</a></div>-->
+<!--            </div>-->
 
-        </div>
+<!--        </div>-->
     </div>
     <!-- search -->
     <script type="text/javascript">

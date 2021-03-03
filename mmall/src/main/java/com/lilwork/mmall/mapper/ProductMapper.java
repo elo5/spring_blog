@@ -2,6 +2,7 @@ package com.lilwork.mmall.mapper;
 
 import com.lilwork.mmall.entity.Product;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.springframework.stereotype.Repository;
 
 /**
  * <p>
@@ -11,6 +12,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author lil
  * @since 2021-03-02
  */
+@Repository
 public interface ProductMapper extends BaseMapper<Product> {
 
 }
