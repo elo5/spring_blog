@@ -1,14 +1,14 @@
 package com.lilwork.mmall.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.lilwork.mmall.entity.Cart;
 import com.lilwork.mmall.entity.User;
 import com.lilwork.mmall.service.CartService;
+import com.lilwork.mmall.service.UserAddressService;
 import com.lilwork.mmall.vo.CartVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.ModelAndView;
@@ -30,6 +30,8 @@ public class CartController {
 
     @Autowired
     private CartService cartService;
+    @Autowired
+    private UserAddressService userAddressService;
 
     @GetMapping("/add/{productId}/{price}/{quantity}") //http://localhost:9099/cart/add/768/5896/3
     public String add(
@@ -72,6 +74,36 @@ public class CartController {
 
         return modelAndView;
 
+    }
+
+    @GetMapping("/settlement2")
+    public ModelAndView settlement2(HttpSession session){
+        ModelAndView  modelAndView  = new ModelAndView();
+        modelAndView.setViewName("settlement2");
+        User user = (User) session.getAttribute("user");
+        modelAndView.addObject("cartList", user == null ? new ArrayList<CartVO>() :cartService.findAllCartVOByUserId(user.getId()));
+        if (user !=  null){
+            QueryWrapper wrapper = new QueryWrapper();
+            wrapper.eq("user_id", user.getId());
+            modelAndView.addObject("addressList", userAddressService.list(wrapper));
+        }
+        return modelAndView;
+    }
+
+    @PostMapping("/update/{id}/{quantity}/{cost}")
+    @ResponseBody
+    public String updateCart(
+            @PathVariable("id") Integer id,
+            @PathVariable("quantity") Integer quantity,
+            @PathVariable("cost") Float cost,
+            HttpSession session){
+        Cart cart = cartService.getById(id);
+        cart.setQuantity(quantity);
+        cart.setCost(cost);
+        if (cartService.updateById(cart)){
+            return "success";
+        }
+        return "failed";
     }
 
 

@@ -1,7 +1,7 @@
 package com.lilwork.mmall.service.impl;
 
-import com.lilwork.mmall.entity.Order;
-import com.lilwork.mmall.mapper.OrderMapper;
+import com.lilwork.mmall.entity.OrderBean;
+import com.lilwork.mmall.mapper.OrderBeanMapper;
 import com.lilwork.mmall.service.OrderService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
@@ -15,6 +15,6 @@ import org.springframework.stereotype.Service;
  * @since 2021-03-02
  */
 @Service
-public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements OrderService {
+public class OrderServiceImpl extends ServiceImpl<OrderBeanMapper, OrderBean> implements OrderService {
 
 }

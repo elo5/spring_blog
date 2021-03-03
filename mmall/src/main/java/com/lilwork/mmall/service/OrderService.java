@@ -1,6 +1,6 @@
 package com.lilwork.mmall.service;
 
-import com.lilwork.mmall.entity.Order;
+import com.lilwork.mmall.entity.OrderBean;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author lil
  * @since 2021-03-02
  */
-public interface OrderService extends IService<Order> {
+public interface OrderService extends IService<OrderBean> {
 
 }
