@@ -8,3 +8,4 @@
 使用
 ```AutoGenerator autoGenerator = new AutoGenerator(); ``` 
 
+### 生成的实体类没法满足要求时，才封装VO类

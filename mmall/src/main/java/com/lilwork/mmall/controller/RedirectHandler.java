@@ -10,4 +10,10 @@ public class RedirectHandler {
     public String redirect(@PathVariable("url") String url){
         return url;
     }
+
+    @GetMapping("/")
+    public String main(){
+        return "redirect:/productCategory/list";
+//        return "forward:/productCategory/list";
+    }
 }

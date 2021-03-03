@@ -946,7 +946,7 @@ APPLICATION_PASSWORD_ADMIN,BACKUP_ADMIN,BINLOG_ADMIN,BINLOG_ENCRYPTION_ADMIN,CON
     </column>
     <column id="299" parent="289" name="cost">
       <Position>4</Position>
-      <DataType>int(11)|0s</DataType>
+      <DataType>float|0s</DataType>
     </column>
     <column id="300" parent="289" name="user_id">
       <Position>5</Position>

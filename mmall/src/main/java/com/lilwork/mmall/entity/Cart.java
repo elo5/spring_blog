@@ -30,7 +30,7 @@ import lombok.EqualsAndHashCode;
 
     private Integer quantity;
 
-    private Integer cost;
+    private Float cost;
 
     private Integer userId;
 
