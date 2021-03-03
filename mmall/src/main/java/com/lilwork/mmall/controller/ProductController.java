@@ -14,7 +14,7 @@ import org.springframework.stereotype.Controller;
  * @since 2021-03-02
  */
 @Controller
-@RequestMapping("//product")
+@RequestMapping("/product")
 public class ProductController {
 
 }
