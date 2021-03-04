@@ -1,6 +1,7 @@
 package com.lilwork.mmall.service.impl;
 
 import com.lilwork.mmall.entity.User;
+import com.lilwork.mmall.enums.GenderEnum;
 import com.lilwork.mmall.mapper.UserMapper;
 import com.lilwork.mmall.service.UserService;
 import org.junit.jupiter.api.Test;
@@ -19,7 +20,7 @@ class UserServiceImplTest {
     public void test1(){
 
         User u = new User();
-        u.setGender(1);
+        u.setGender(GenderEnum.WOMAN);
         u.setEmail("elo5@qq.com");
         u.setIdentityCode("320602195811111111");
         u.setMobile("18911111111");

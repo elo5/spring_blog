@@ -13,6 +13,7 @@ public class FilterConfig {
         FilterRegistrationBean registrationBean = new FilterRegistrationBean();
         registrationBean.setFilter(new UserFilter());
         registrationBean.addUrlPatterns("/cart/*");
+//        registrationBean.addUrlPatterns("/cart/*", "/orders/*", "user/userInfo");
         return registrationBean;
     }
 }

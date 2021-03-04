@@ -1,6 +1,6 @@
 package com.lilwork.mmall.mapper;
 
-import com.lilwork.mmall.entity.OrderBean;
+import com.lilwork.mmall.entity.Orders;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.springframework.stereotype.Repository;
 
@@ -13,6 +13,6 @@ import org.springframework.stereotype.Repository;
  * @since 2021-03-02
  */
 @Repository
-public interface OrderBeanMapper extends BaseMapper<OrderBean> {
+public interface OrdersMapper extends BaseMapper<Orders> {
 
 }

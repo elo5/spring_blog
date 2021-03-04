@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
+
+import com.lilwork.mmall.enums.GenderEnum;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -47,7 +49,7 @@ import lombok.EqualsAndHashCode;
       /**
      * 性别(1:男 0：女)
      */
-      private Integer gender;
+      private GenderEnum gender;
 
       /**
      * 身份证号

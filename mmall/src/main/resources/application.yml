@@ -11,7 +11,7 @@ spring:
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-  type-enums-package: com.southwind.mmall002.enums
+  type-enums-package: com.lilwork.mmall.enums
 
 server:
   port: 9099

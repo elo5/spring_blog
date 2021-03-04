@@ -19,7 +19,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
   @EqualsAndHashCode(callSuper = false)
-    public class OrderBean implements Serializable {
+    public class Orders implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
